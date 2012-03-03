@@ -8,15 +8,22 @@ class Generator:
     def happens(self, chance):
         return random.random() <= chance
 
+    def reset(self):
+        self.__init__()
+
 class NumbersGenerator(Generator):
     def __init__ (self):
         self.solution = ""
         self.target = 0
+        self.large = 0
+        self.small = 0
+        self.larges = [100, 75, 50, 25]
+        self.smalls = [1,2,3,4,5,6,7,8,9,10]
         self.large_picks = []
         self.small_picks = []
 
     #Generates a target and a solution
-    def generate(self, (large, small), larges, smalls):
+    def generate(self):
         self.pick_numbers((large, small), larges[:], smalls[:])
         
     #Shuffles the large numbers and picks the first x,
@@ -27,7 +34,9 @@ class NumbersGenerator(Generator):
     #be picked with no problem.
     #After being picked, the probability gets quartered so
     #being successfully picked twice is unlikely.
-    def pick_numbers(self, (large, small), larges, smalls):
+    def pick_numbers(self):
+        larges = self.larges[:]
+        smalls = self.smalls[:]
         random.shuffle(larges)
         random.shuffle(smalls)
 
@@ -36,7 +45,7 @@ class NumbersGenerator(Generator):
         
         self.large_picks = larges
         self.small_picks = []
-        for i in xrange(small):
+        for i in xrange(self.small):
             picked = False
             while not picked:
                 pick = random.randint(0, len(smalls)-1)
