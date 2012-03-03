@@ -21,7 +21,7 @@ class NumbersGenerator(Generator):
         
     #Shuffles the large numbers and picks the first x,
     #no duplicates
-    #Picks from the smalls given, duplicated are allowed
+    #Picks from the smalls given, duplicates are allowed
     #but are based on a probability system.
     #Each number starts off with 1.0 probability so they can
     #be picked with no problem.
