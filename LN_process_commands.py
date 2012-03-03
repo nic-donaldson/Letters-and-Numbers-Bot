@@ -120,6 +120,8 @@ def numsGiven(msg, chooser):
     if getName(msg) == chooser:
         if re.match(accepted_num_pattern, msgGet(msg)):
             x,y = msgGet(msg).split(":")
+            if int(x) >=5 or int(y) >=5:
+                return False
             if int(x)+int(y) == 6:
                 return True
     return False

@@ -38,12 +38,11 @@ for i in \
 from IRC_LN_commands import *
 from LN_process_commands import *
 import time
-import random
+import random   #Doesn't need seeding as this is done automatically
+                #upon import
 import re
 
-
 players = []
-random.seed(time.time())
 
 game_state = {
     "game":{
@@ -184,7 +183,7 @@ while 1:
             chooser = players[0]
             IRCmsg(IRCsock, chooser + " has been chosen to pick the numbers.", channel)
             IRCmsg(IRCsock, "Please give them in the format 'Large:Small' with your"\
-                           +" next message. Total of 6 numbers required.", channel)
+                           +" next message. Total of 6 numbers required. Maximum of 4 of each kind.", channel)
             game_state["numbers"]["nums_please"] = True
             game_state["numbers"]["gen_problem"] = False
         elif game_state["numbers"]["nums_please"]:
