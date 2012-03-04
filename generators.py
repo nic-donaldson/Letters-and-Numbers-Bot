@@ -21,11 +21,13 @@ class NumbersGenerator(Generator):
         self.smalls = [1,2,3,4,5,6,7,8,9,10]
         self.large_picks = []
         self.small_picks = []
+        self.numbers = []
 
     #Generates numbers and a target
     def generate(self):
         self.pick_numbers()
         self.target = random.randint(100, 999)
+        self.numbers = self.large_picks + self.small_picks
 
     def large_small(self, large, small):
         self.large = large

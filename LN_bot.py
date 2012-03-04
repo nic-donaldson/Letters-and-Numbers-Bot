@@ -44,6 +44,7 @@ import random   #Doesn't need seeding as this is done automatically
 import re
 
 players = []
+numbers = NumbersGenerator()
 
 game_state = {
     "game":{
@@ -197,10 +198,12 @@ while 1:
                 IRCmsg(IRCsock, "Numbers are good, starting now.", channel)
                 game_state["numbers"]["nums_please"] = False
                 
-                target, numbers, solution = makeProblem(num_large, num_small, larges, smalls)
-                IRCmsg(IRCsock, "Your numbers are: " + ', '.join([str(x) for x in numbers])\
-                        , channel)
-                IRCmsg(IRCsock, "Your target is: " + str(target), channel)
+                #Generate some numbers
+                numbers.reset()
+                numbers.large_small(num_large, num_small)
+                numbers.generate()
+                IRCmsg(IRCsock, "Your numbers are: " + ', '.join([str(x) for x in numbers.numbers]), channel)
+                IRCmsg(IRCsock, "Your target is: " + str(numbers.target), channel)
 
                 game_state["numbers"]["give_problem"] = False
                 game_state["numbers"]["waiting"] = True        
@@ -214,11 +217,9 @@ while 1:
 
         elif game_state["numbers"]["waiting"]:
             if gameTimeOut(game_time, timeouts["game"]):
-                IRCmsg(IRCsock, "Numbers game has timed out, no longer accepting answers."\
-                        , channel)
+                IRCmsg(IRCsock, "Numbers game has timed out, no longer accepting answers.", channel)
                 IRCsock.settimeout(None)
-                if give_soln:
-                    IRCmsg(IRCsock, "One solution was: " + solution, channel)
+
                 game_state["numbers"]["results_please"] = True
                 game_state["numbers"]["waiting"] = False
 
@@ -239,7 +240,7 @@ while 1:
             correct = []
             for i in answers:
                 if len(answers[i]):
-                    if isCorrect(target, numbers, answers[i]):
+                    if isCorrect(numbers.target, numbers.numbers, answers[i]):
                         correct.append(i)
 
             if len(correct) == 0:
