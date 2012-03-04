@@ -2,9 +2,6 @@
 
 data = ''
 
-larges = [100, 75, 50, 25]
-smalls = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
 # numbers of vowels and consonants based off of a standard
 # English Scrabble board
 # TODO: remake this with percentages
