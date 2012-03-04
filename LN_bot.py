@@ -183,7 +183,7 @@ while 1:
             chooser = players[0]
             IRCmsg(IRCsock, chooser + " has been chosen to pick the numbers.", channel)
             IRCmsg(IRCsock, "Please give them in the format 'Large:Small' with your"\
-                           +" next message. Total of 6 numbers required. Maximum of 4 of each kind.", channel)
+                           +" next message. Total of 6 numbers required. Maximum of 4 larges.", channel)
             game_state["numbers"]["nums_please"] = True
             game_state["numbers"]["gen_problem"] = False
         elif game_state["numbers"]["nums_please"]:
