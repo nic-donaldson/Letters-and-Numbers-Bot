@@ -12,19 +12,24 @@ class Generator:
         self.__init__()
 
 class NumbersGenerator(Generator):
+    #Default values
     def __init__ (self):
-        self.solution = ""
         self.target = 0
-        self.large = 0
-        self.small = 0
+        self.large = 2
+        self.small = 4
         self.larges = [100, 75, 50, 25]
         self.smalls = [1,2,3,4,5,6,7,8,9,10]
         self.large_picks = []
         self.small_picks = []
 
-    #Generates a target and a solution
+    #Generates numbers and a target
     def generate(self):
-        self.pick_numbers((large, small), larges[:], smalls[:])
+        self.pick_numbers()
+        self.target = random.randint(100, 999)
+
+    def large_small(self, large, small):
+        self.large = large
+        self.small = small
         
     #Shuffles the large numbers and picks the first x,
     #no duplicates
@@ -35,12 +40,12 @@ class NumbersGenerator(Generator):
     #After being picked, the probability gets quartered so
     #being successfully picked twice is unlikely.
     def pick_numbers(self):
-        larges = self.larges[:]
-        smalls = self.smalls[:]
+        larges = self.larges
+        smalls = self.smalls
         random.shuffle(larges)
         random.shuffle(smalls)
 
-        larges = larges[:large]
+        larges = larges[:self.large]
         small_prob = [1.0 for x in xrange(len(smalls))]
         
         self.large_picks = larges
@@ -53,5 +58,3 @@ class NumbersGenerator(Generator):
                     picked = True
                     self.small_picks.append(smalls[pick])
                     small_prob[pick] /= 4.0
-
-

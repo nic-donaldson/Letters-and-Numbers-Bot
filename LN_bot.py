@@ -37,6 +37,7 @@ for i in \
 
 from IRC_LN_commands import *
 from LN_process_commands import *
+from generators import *
 import time
 import random   #Doesn't need seeding as this is done automatically
                 #upon import
@@ -84,7 +85,7 @@ timeouts = {
         "call":14,
         "game":60
         }
-give_soln = True
+#give_soln = True
 
 # Connect to the server and join the channel
 IRCsock = connect(server, port, nick, name)
