@@ -75,7 +75,7 @@ server = 'irc.freenode.net'
 port = 6667
 nick = 'LN_bot'
 name = "Letters and Numbers bot"
-channel = '##letters_and_numbers'
+channel = '##ncss_challenge'
 buf = 4096
 call_time = int(time.time())
 controllers = ['Sugarloaf0', 'patrick333']
@@ -158,7 +158,7 @@ while 1:
             game_state["numbers"]["round"] += 1 # Round 1
             IRCsock.settimeout(None)
             if len(players) <= 1:
-                IRCmsg(IRCsock, "Not enough players, game will not start",\
+                IRCmsg(IRCsock, "Not enough players, game will not start.",\
                         channel)
                 game_state["numbers"]["round"] -= 1
                 
